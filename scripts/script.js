@@ -36,7 +36,7 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// Reveal sections on scroll
+// Reveal sections on scroll with enhanced animations
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
@@ -54,41 +54,110 @@ document.querySelectorAll('.section').forEach(section => {
     observer.observe(section);
 });
 
-// Initialize first section as visible
+// Initialize first section as visible on page load
 document.addEventListener('DOMContentLoaded', () => {
     const firstSection = document.querySelector('.section');
     if (firstSection) {
         firstSection.classList.add('visible');
     }
+    
+    // Add staggered animation to tech badges
+    const techBadges = document.querySelectorAll('.tech-badge');
+    techBadges.forEach((badge, index) => {
+        badge.style.animationDelay = `${index * 0.2}s`;
+    });
 });
 
-// Add smooth hover effects for project cards
+// Enhanced hover effects for project cards
 document.querySelectorAll('.project-card').forEach(card => {
     card.addEventListener('mouseenter', () => {
         card.style.transform = 'translateY(-10px)';
+        card.style.boxShadow = '0 15px 40px rgba(102, 126, 234, 0.15)';
     });
     
     card.addEventListener('mouseleave', () => {
-        card.style.transform = 'translateY(-5px)';
+        card.style.transform = 'translateY(0)';
+        card.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
     });
 });
 
-// Add smooth hover effects for skill cards
+// Enhanced hover effects for skill cards
 document.querySelectorAll('.skill-card').forEach(card => {
     card.addEventListener('mouseenter', () => {
         card.style.transform = 'translateY(-8px)';
+        card.style.boxShadow = '0 12px 30px rgba(102, 126, 234, 0.15)';
     });
     
     card.addEventListener('mouseleave', () => {
-        card.style.transform = 'translateY(-5px)';
+        card.style.transform = 'translateY(0)';
+        card.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
     });
+});
+
+// Add ripple effect to buttons
+document.querySelectorAll('.btn').forEach(button => {
+    button.addEventListener('click', function(e) {
+        const ripple = document.createElement('span');
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+        
+        ripple.style.cssText = `
+            position: absolute;
+            width: ${size}px;
+            height: ${size}px;
+            left: ${x}px;
+            top: ${y}px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            pointer-events: none;
+        `;
+        
+        this.style.position = 'relative';
+        this.style.overflow = 'hidden';
+        this.appendChild(ripple);
+        
+        setTimeout(() => {
+            ripple.remove();
+        }, 600);
+    });
+});
+
+// Add CSS for ripple animation dynamically
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes ripple {
+        to {
+            transform: scale(4);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(style);
+
+// Parallax effect for hero section
+window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const hero = document.querySelector('.hero');
+    if (hero) {
+        const rate = scrolled * -0.5;
+        hero.style.transform = `translateY(${rate}px)`;
+    }
 });
 
 // Console message for developers who inspect the page
 console.log(`
-🚀 Welcome to my portfolio!
+🚀 Welcome to Manzi's Portfolio!
 👋 Thanks for checking out the code.
-💼 If you're interested in working together, let's connect!
+💼 Built with HTML, CSS, and JavaScript
+🎨 Featuring custom animations and responsive design
+📧 Contact: manzi.ishimwe2023@gmail.com
+🔗 GitHub: https://github.com/Manzi004
+
+If you're interested in working together, let's connect!
 `);
 
 // Optional: Add loading animation
@@ -100,3 +169,27 @@ window.addEventListener('load', () => {
         document.body.style.opacity = '1';
     }, 100);
 });
+
+// Add typing effect to hero title (optional enhancement)
+function typeWriter(element, text, speed = 50) {
+    let i = 0;
+    element.innerHTML = '';
+    
+    function type() {
+        if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
+        }
+    }
+    type();
+}
+
+// Uncomment the lines below if you want typing effect on the hero title
+// document.addEventListener('DOMContentLoaded', () => {
+//     const heroTitle = document.querySelector('.hero-title');
+//     if (heroTitle) {
+//         const originalText = heroTitle.textContent;
+//         typeWriter(heroTitle, originalText, 50);
+//     }
+// });
