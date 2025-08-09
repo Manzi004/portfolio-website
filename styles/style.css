@@ -77,7 +77,6 @@ section {
     padding: 4rem 3rem;
     margin: 2rem 0;
     box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-    text-align: center;
     position: relative;
     overflow: hidden;
 }
@@ -94,6 +93,23 @@ section {
     z-index: 1;
 }
 
+.hero-content {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-text {
+    flex: 1;
+    text-align: left;
+}
+
+.hero-image {
+    flex: 0 0 300px;
+}
+
 .hero-title {
     font-size: 3rem;
     margin-bottom: 1.5rem;
@@ -102,8 +118,6 @@ section {
     background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: fadeInUp 1s ease-out;
-    position: relative;
-    z-index: 2;
 }
 
 .hero-subtitle {
@@ -112,19 +126,15 @@ section {
     color: #666;
     line-height: 1.6;
     animation: fadeInUp 1s ease-out 0.2s both;
-    position: relative;
-    z-index: 2;
 }
 
 .tech-badges {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
     gap: 1rem;
     margin-bottom: 2.5rem;
     animation: fadeInUp 1s ease-out 0.4s both;
-    position: relative;
-    z-index: 2;
 }
 
 .tech-badge {
@@ -150,11 +160,9 @@ section {
 
 .hero-buttons {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 1rem;
     animation: fadeInUp 1s ease-out 0.6s both;
-    position: relative;
-    z-index: 2;
     flex-wrap: wrap;
 }
 
@@ -214,6 +222,26 @@ section {
 
 .btn:hover .btn-icon {
     transform: translateX(3px);
+}
+
+.profile-avatar {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid #667eea;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    animation: photoFloat 3s ease-in-out infinite;
+}
+
+.avatar-initials {
+    font-size: 4rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
 /* About Section */
@@ -289,6 +317,67 @@ section {
     justify-content: center;
     color: white;
     font-size: 1.2rem;
+}
+
+/* Project Mockups */
+.mockup-browser {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.browser-header {
+    background: #f0f0f0;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.browser-dots {
+    display: flex;
+    gap: 5px;
+}
+
+.browser-dots span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ff5f56;
+}
+
+.browser-dots span:nth-child(2) { background: #ffbd2e; }
+.browser-dots span:nth-child(3) { background: #27ca3f; }
+
+.browser-content {
+    padding: 20px;
+    text-align: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #667eea;
+    color: white;
+}
+
+.browser-content h4 {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.mockup-features {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.feature-item {
+    background: rgba(255,255,255,0.2);
+    padding: 6px;
+    border-radius: 5px;
+    font-size: 0.8rem;
 }
 
 .project-content {
@@ -384,6 +473,15 @@ footer {
     }
 }
 
+@keyframes photoFloat {
+    0%, 100% { 
+        transform: translateY(0px); 
+    }
+    50% { 
+        transform: translateY(-10px); 
+    }
+}
+
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
     nav ul {
@@ -391,8 +489,39 @@ footer {
         gap: 1rem;
     }
 
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+    }
+    
+    .hero-text {
+        text-align: center;
+    }
+    
+    .tech-badges {
+        justify-content: center;
+    }
+    
+    .hero-buttons {
+        justify-content: center;
+    }
+    
+    .profile-avatar {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .avatar-initials {
+        font-size: 3rem;
+    }
+
     .hero-title {
         font-size: 2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
     }
 
     .section-title {
@@ -414,10 +543,6 @@ footer {
 
     .hero {
         padding: 3rem 2rem;
-    }
-
-    .hero-subtitle {
-        font-size: 1.1rem;
     }
 }
 

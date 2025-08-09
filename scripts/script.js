@@ -138,12 +138,12 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Parallax effect for hero section
+// Parallax effect for hero section (subtle)
 window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
     const hero = document.querySelector('.hero');
     if (hero) {
-        const rate = scrolled * -0.5;
+        const rate = scrolled * -0.1;
         hero.style.transform = `translateY(${rate}px)`;
     }
 });
@@ -170,26 +170,21 @@ window.addEventListener('load', () => {
     }, 100);
 });
 
-// Add typing effect to hero title (optional enhancement)
-function typeWriter(element, text, speed = 50) {
-    let i = 0;
-    element.innerHTML = '';
-    
-    function type() {
-        if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-        }
-    }
-    type();
+// Smooth scroll to top functionality (can be activated later)
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
 }
 
-// Uncomment the lines below if you want typing effect on the hero title
-// document.addEventListener('DOMContentLoaded', () => {
-//     const heroTitle = document.querySelector('.hero-title');
-//     if (heroTitle) {
-//         const originalText = heroTitle.textContent;
-//         typeWriter(heroTitle, originalText, 50);
-//     }
-// });
+// Add smooth transitions for external links
+document.querySelectorAll('a[target="_blank"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+        // Add visual feedback for external links
+        link.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            link.style.transform = 'scale(1)';
+        }, 150);
+    });
+});
